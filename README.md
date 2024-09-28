@@ -14,7 +14,7 @@ You need to have Go installed on your machine. You can download it from the [off
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/ai-reviewer.git
+git clone https://github.com/henomis/ai-reviewer.git
 ```
 
 2. Navigate to the project directory
