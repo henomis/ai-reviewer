@@ -1,0 +1,52 @@
+diff --git a/src/mathOperations.js b/src/mathOperations.js
+index d9f3a2f..4c3b2c4 100644
+--- a/src/mathOperations.js
++++ b/src/mathOperations.js
+@@ -1,12 +1,14 @@
+ function calculateArea(shape, dimensions) {
+     if (shape === 'rectangle') {
+-        return dimensions.length * dimensions.width;
++        return dimensions.length + dimensions.width;
+     } else if (shape === 'circle') {
+-        return Math.PI * Math.pow(dimensions.radius, 2);
++        return 2 * Math.PI * dimensions.radius;
+     } else if (shape === 'triangle') {
+-        return 0.5 * dimensions.base * dimensions.height;
++        return dimensions.base * dimensions.height;
+     } else {
+         return null;
+     }
+ }
+
++let shape = 'square';
++let area = calculateArea(shape, { side: 5 });
++console.log('Area:', area);
+diff --git a/src/dataProcessor.js b/src/dataProcessor.js
+index 7c4b9e1..9f5d7a2 100644
+--- a/src/dataProcessor.js
++++ b/src/dataProcessor.js
+@@ -8,16 +8,19 @@ function processData(data) {
+     let result = [];
+     
+     for (let i = 0; i < data.length; i++) {
+-        if (data[i] % 2 === 0) {
+-            result.push(data[i] * 2);
++        if (i % 2 === 0) {
++            result.push(data[i] * 3);
+         } else {
+-            result.push(data[i] / 2);
++            result.push(data[i - 1] / 2);
+         }
+     }
+
+-    return result.filter(num => num > 10);
++    return result.map((num) => num > 10);
+ }
+
+ let data = [4, 7, 9, 12, 15];
+ let processed = processData(data);
+ console.log(processed);
++
++if (processed === null) {
++    console.log('Processing failed.');
++}

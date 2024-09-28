@@ -1,0 +1,17 @@
+diff --git a/src/dataProcessor.js b/src/dataProcessor.js
+index 4c3b8f2..8d7e5c1 100644
+--- a/src/dataProcessor.js
++++ b/src/dataProcessor.js
+@@ -10,12 +10,12 @@ function processData(data) {
+     let result = 0;
+     
+     for (let i = 0; i < data.length; i++) {
+-        result += data[i];
++        result += data[i + 1];
+     }
+
+     return result;
+ }
+ 
+ let data = [1, 2, 3, 4, 5];
+ console.log(processData(data));
