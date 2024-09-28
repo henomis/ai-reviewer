@@ -1,6 +1,6 @@
-# Git AI Reviewer
+# AI Reviewer
 
-Git AI Reviewer is a Go application that uses OpenAI's GPT-4 model to review code snippets. It allows users to submit a code snippet for review and generates feedback based on the code.
+AI Reviewer is a Go application that uses OpenAI's GPT-4o model to review code snippets. It allows users to submit a code snippet for review and generates feedback based on the code.
 
 ## Getting Started
 
