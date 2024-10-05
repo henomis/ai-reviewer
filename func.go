@@ -19,6 +19,7 @@ type Review struct {
 
 type Issue struct {
 	File        string `json:"file" jsonschema:"description=File path"`
+	Severity    string `json:"severity" jsonschema:"description=Severity of the issue (low, medium, high)"`
 	Code        string `json:"code" jsonschema:"description=Code snippet of the issue"`
 	Description string `json:"description" jsonschema:"description=Description of the issue in markdown format"`
 	Suggestion  string `json:"suggestion" jsonschema:"description=Suggested fix for the issue in markdown format"`
@@ -44,23 +45,24 @@ func getInput(filepath string) (string, error) {
 
 func printMarkdownOutput(diff *diffparser.Diff, r *Review, verbose bool) {
 	for _, file := range diff.Files {
-		fmt.Println("# " + file.NewName + "\n")
-
-		if verbose {
-			for _, hunk := range file.Hunks {
-				fmt.Printf("```%s\n", r.Language)
-				for _, line := range hunk.NewRange.Lines {
-					fmt.Printf("%d\t%s\n", line.Number, line.Content)
-				}
-				fmt.Printf("```\n\n---\n\n")
-			}
-		}
-
-		fmt.Printf("\n\n")
-
 		for i, issue := range r.Issues {
 			if issue.File == file.NewName {
-				fmt.Printf("### Issue #%d\n\n", i+1)
+				fmt.Println("# " + file.NewName + "\n")
+
+				if verbose {
+					for _, hunk := range file.Hunks {
+						fmt.Printf("```%s\n", r.Language)
+						for _, line := range hunk.NewRange.Lines {
+							fmt.Printf("%d\t%s\n", line.Number, line.Content)
+						}
+						fmt.Printf("```\n\n---\n\n")
+					}
+				}
+
+				fmt.Printf("\n\n")
+
+				fmt.Printf("### Issue %d\n\n", i+1)
+				fmt.Printf("**Severity:** %s\n\n", issue.Severity)
 				fmt.Printf("```%s\n", r.Language)
 				fmt.Println(issue.Code)
 				fmt.Println("```")
